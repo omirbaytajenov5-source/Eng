@@ -1,0 +1,1191 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>EN · RU · QQ — Lug'at & Test</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #0c0e14;
+  --surface: #13161f;
+  --surface2: #1a1e2a;
+  --border: #252b3b;
+  --border2: #2e3650;
+  --en: #4f9eff;
+  --ru: #ff5f5f;
+  --kk: #3ecf8e;
+  --accent: #6c63ff;
+  --text: #e8edf8;
+  --muted: #5a6482;
+  --muted2: #8090b0;
+  --r: 12px;
+  --r2: 8px;
+}
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: 'Outfit', sans-serif;
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+/* Subtle animated bg grid */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background-image:
+    linear-gradient(rgba(79,158,255,.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(79,158,255,.03) 1px, transparent 1px);
+  background-size: 40px 40px;
+  pointer-events: none;
+  z-index: 0;
+}
+body::after {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background:
+    radial-gradient(ellipse 70% 50% at 10% 0%, rgba(108,99,255,.08) 0%, transparent 60%),
+    radial-gradient(ellipse 50% 40% at 90% 100%, rgba(62,207,142,.06) 0%, transparent 60%);
+  pointer-events: none;
+  z-index: 0;
+}
+
+.wrap {
+  position: relative;
+  z-index: 1;
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 0 20px 80px;
+}
+
+/* ===== HEADER ===== */
+header {
+  padding: 52px 0 36px;
+  text-align: center;
+}
+.header-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 5px 18px;
+  background: rgba(79,158,255,.08);
+  border: 1px solid rgba(79,158,255,.2);
+  border-radius: 30px;
+  font-size: .72rem;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: var(--en);
+  margin-bottom: 20px;
+  font-weight: 600;
+}
+.header-dot {
+  width: 6px; height: 6px;
+  border-radius: 50%;
+  animation: pulse 2s ease-in-out infinite;
+}
+.header-dot.en { background: var(--en); }
+.header-dot.ru { background: var(--ru); animation-delay: .4s; }
+.header-dot.kk { background: var(--kk); animation-delay: .8s; }
+@keyframes pulse { 0%,100%{opacity:.4;transform:scale(.8)} 50%{opacity:1;transform:scale(1.2)} }
+
+h1 {
+  font-family: 'Syne', sans-serif;
+  font-size: clamp(2rem, 5vw, 3.2rem);
+  font-weight: 800;
+  letter-spacing: -2px;
+  line-height: 1.1;
+  margin-bottom: 12px;
+}
+h1 .grad {
+  background: linear-gradient(120deg, var(--en) 0%, var(--accent) 50%, var(--kk) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+header p {
+  color: var(--muted2);
+  font-size: .95rem;
+  font-weight: 300;
+  max-width: 460px;
+  margin: 0 auto;
+}
+
+/* ===== TABS ===== */
+.tabs-wrap {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 28px;
+}
+.tabs {
+  display: flex;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 50px;
+  padding: 4px;
+  gap: 4px;
+}
+.tab-btn {
+  padding: 10px 28px;
+  border-radius: 50px;
+  border: none;
+  background: transparent;
+  color: var(--muted2);
+  font-family: 'Syne', sans-serif;
+  font-size: .875rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all .25s cubic-bezier(.4,0,.2,1);
+  letter-spacing: .5px;
+}
+.tab-btn.active {
+  background: linear-gradient(135deg, var(--en), var(--accent));
+  color: #fff;
+  box-shadow: 0 4px 16px rgba(79,158,255,.3);
+}
+.tab-btn:hover:not(.active) { color: var(--text); background: var(--surface2); }
+
+.tab-panel { display: none; animation: fadeUp .3s ease both; }
+.tab-panel.active { display: block; }
+@keyframes fadeUp { from{opacity:0;transform:translateY(12px)} to{opacity:1;transform:translateY(0)} }
+
+/* ===== MODULE FILTER ===== */
+.mod-filter {
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+  margin-bottom: 16px;
+}
+.mod-btn {
+  padding: 6px 14px;
+  border-radius: 30px;
+  border: 1px solid var(--border2);
+  background: var(--surface);
+  color: var(--muted2);
+  font-size: .75rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all .2s;
+  letter-spacing: .5px;
+}
+.mod-btn:hover { border-color: var(--en); color: var(--en); }
+.mod-btn.active {
+  background: rgba(79,158,255,.12);
+  border-color: var(--en);
+  color: var(--en);
+}
+
+/* ===== SEARCH ===== */
+.search-row {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  margin-bottom: 16px;
+  flex-wrap: wrap;
+}
+.search-box {
+  flex: 1;
+  min-width: 200px;
+  position: relative;
+}
+.search-box svg {
+  position: absolute;
+  left: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--muted);
+  pointer-events: none;
+}
+.search-box input {
+  width: 100%;
+  background: var(--surface);
+  border: 1px solid var(--border2);
+  border-radius: var(--r2);
+  color: var(--text);
+  font-family: 'Outfit', sans-serif;
+  font-size: .9rem;
+  padding: 10px 14px 10px 38px;
+  transition: border-color .2s;
+  outline: none;
+}
+.search-box input:focus { border-color: var(--en); }
+.search-box input::placeholder { color: var(--muted); }
+.count-tag {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--r2);
+  padding: 8px 14px;
+  font-size: .78rem;
+  color: var(--muted2);
+  white-space: nowrap;
+}
+
+/* ===== DICTIONARY TABLE ===== */
+.dict-wrap {
+  border: 1px solid var(--border);
+  border-radius: var(--r);
+  overflow: hidden;
+}
+.dict-head {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  background: var(--surface);
+  border-bottom: 1px solid var(--border);
+}
+.dh {
+  padding: 11px 16px;
+  font-family: 'Syne', sans-serif;
+  font-size: .68rem;
+  font-weight: 700;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  text-align: center;
+}
+.dh.en { color: var(--en); }
+.dh.ru { color: var(--ru); }
+.dh.kk { color: var(--kk); }
+
+.dict-body {
+  max-height: 520px;
+  overflow-y: auto;
+  scrollbar-width: thin;
+  scrollbar-color: var(--border2) transparent;
+}
+.dict-body::-webkit-scrollbar { width: 4px; }
+.dict-body::-webkit-scrollbar-track { background: transparent; }
+.dict-body::-webkit-scrollbar-thumb { background: var(--border2); border-radius: 2px; }
+
+.dict-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  border-bottom: 1px solid rgba(37,43,59,.7);
+  transition: background .15s;
+}
+.dict-row:last-child { border-bottom: none; }
+.dict-row:hover { background: rgba(79,158,255,.04); }
+.dc {
+  padding: 11px 16px;
+  font-size: .875rem;
+  line-height: 1.4;
+}
+.dc.en { color: var(--text); font-weight: 500; border-left: 2px solid var(--en); }
+.dc.ru { color: rgba(255,95,95,.85); }
+.dc.kk { color: rgba(62,207,142,.85); }
+
+.sec-label {
+  grid-column: 1 / -1;
+  padding: 7px 16px;
+  font-size: .7rem;
+  font-family: 'Syne', sans-serif;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: var(--muted);
+  background: linear-gradient(90deg, rgba(79,158,255,.06), transparent);
+  border-bottom: 1px solid rgba(37,43,59,.5);
+}
+.empty-state {
+  text-align: center;
+  padding: 60px 20px;
+  color: var(--muted);
+}
+.empty-state .big { font-size: 3rem; margin-bottom: 12px; display: block; }
+
+/* ===== QUIZ SETUP ===== */
+.quiz-setup {
+  max-width: 640px;
+  margin: 0 auto;
+}
+.setup-section {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--r);
+  padding: 20px;
+  margin-bottom: 14px;
+}
+.setup-label {
+  font-family: 'Syne', sans-serif;
+  font-size: .72rem;
+  font-weight: 700;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--muted2);
+  margin-bottom: 12px;
+  display: block;
+}
+.dir-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+}
+.dir-btn {
+  padding: 12px;
+  border-radius: var(--r2);
+  border: 1px solid var(--border2);
+  background: var(--surface2);
+  color: var(--muted2);
+  font-family: 'Outfit', sans-serif;
+  font-size: .875rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all .2s;
+  text-align: center;
+}
+.dir-btn:hover { border-color: var(--en); color: var(--en); }
+.dir-btn.active {
+  background: rgba(79,158,255,.12);
+  border-color: var(--en);
+  color: var(--en);
+  font-weight: 600;
+}
+.start-btn {
+  width: 100%;
+  padding: 16px;
+  border-radius: var(--r);
+  border: none;
+  background: linear-gradient(135deg, var(--en), var(--accent));
+  color: #fff;
+  font-family: 'Syne', sans-serif;
+  font-size: 1rem;
+  font-weight: 700;
+  cursor: pointer;
+  letter-spacing: .5px;
+  transition: all .25s;
+  box-shadow: 0 6px 24px rgba(79,158,255,.25);
+}
+.start-btn:hover { transform: translateY(-1px); box-shadow: 0 10px 32px rgba(79,158,255,.35); }
+.start-btn:active { transform: translateY(0); }
+
+/* ===== QUIZ GAME ===== */
+.quiz-card {
+  max-width: 640px;
+  margin: 0 auto;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--r);
+  padding: 28px;
+}
+.quiz-meta {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 24px;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+.q-badge {
+  padding: 6px 16px;
+  border-radius: 30px;
+  font-size: .78rem;
+  font-weight: 700;
+  font-family: 'Syne', sans-serif;
+  letter-spacing: .5px;
+}
+.q-badge.savol { background: rgba(79,158,255,.12); color: var(--en); border: 1px solid rgba(79,158,255,.25); }
+.q-badge.score { background: rgba(62,207,142,.12); color: var(--kk); border: 1px solid rgba(62,207,142,.25); }
+
+.progress-bar {
+  width: 100%;
+  height: 3px;
+  background: var(--border);
+  border-radius: 2px;
+  overflow: hidden;
+  margin-bottom: 28px;
+}
+.progress-fill {
+  height: 100%;
+  background: linear-gradient(90deg, var(--en), var(--kk));
+  border-radius: 2px;
+  transition: width .4s cubic-bezier(.4,0,.2,1);
+}
+
+.quiz-prompt {
+  text-align: center;
+  font-size: .68rem;
+  font-family: 'Syne', sans-serif;
+  font-weight: 700;
+  letter-spacing: 2.5px;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-bottom: 14px;
+}
+.quiz-word {
+  text-align: center;
+  font-family: 'Syne', sans-serif;
+  font-size: clamp(1.6rem, 4vw, 2.4rem);
+  font-weight: 800;
+  color: var(--text);
+  padding: 22px 28px;
+  background: var(--surface2);
+  border: 1px solid var(--border2);
+  border-radius: var(--r);
+  margin-bottom: 24px;
+  letter-spacing: -1px;
+  animation: wordPop .25s cubic-bezier(.4,0,.2,1) both;
+}
+@keyframes wordPop { from{opacity:0;transform:scale(.95)} to{opacity:1;transform:scale(1)} }
+
+.options {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+  margin-bottom: 10px;
+}
+.opt-btn {
+  padding: 16px 12px;
+  border-radius: var(--r2);
+  border: 1px solid var(--border2);
+  background: var(--surface2);
+  color: var(--text);
+  font-family: 'Outfit', sans-serif;
+  font-size: .9rem;
+  font-weight: 400;
+  cursor: pointer;
+  transition: all .2s;
+  text-align: center;
+  line-height: 1.4;
+  min-height: 56px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.opt-btn:hover:not(:disabled) {
+  border-color: var(--en);
+  background: rgba(79,158,255,.08);
+  transform: translateY(-1px);
+}
+.opt-btn.correct {
+  background: rgba(62,207,142,.12);
+  border-color: var(--kk);
+  color: var(--kk);
+  font-weight: 600;
+}
+.opt-btn.wrong {
+  background: rgba(255,95,95,.1);
+  border-color: var(--ru);
+  color: var(--ru);
+}
+.opt-btn:disabled { cursor: default; transform: none; }
+
+/* ===== RESULT ===== */
+.result-wrap {
+  max-width: 500px;
+  margin: 0 auto;
+  text-align: center;
+  padding: 20px;
+}
+.result-ring {
+  width: 140px;
+  height: 140px;
+  border-radius: 50%;
+  margin: 0 auto 24px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  border: 3px solid var(--en);
+  background: rgba(79,158,255,.06);
+  position: relative;
+}
+.result-ring::before {
+  content: '';
+  position: absolute;
+  inset: -8px;
+  border-radius: 50%;
+  border: 1px solid rgba(79,158,255,.15);
+}
+.result-score-big {
+  font-family: 'Syne', sans-serif;
+  font-size: 2.8rem;
+  font-weight: 800;
+  color: var(--en);
+  letter-spacing: -2px;
+  line-height: 1;
+}
+.result-total {
+  font-size: .8rem;
+  color: var(--muted2);
+  margin-top: 2px;
+}
+.result-msg {
+  font-family: 'Syne', sans-serif;
+  font-size: 1.3rem;
+  font-weight: 700;
+  color: var(--text);
+  margin-bottom: 8px;
+}
+.result-sub {
+  color: var(--muted2);
+  font-size: .9rem;
+  margin-bottom: 28px;
+}
+.result-btns {
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+.btn-primary {
+  padding: 12px 28px;
+  border-radius: var(--r);
+  border: none;
+  background: linear-gradient(135deg, var(--en), var(--accent));
+  color: #fff;
+  font-family: 'Syne', sans-serif;
+  font-size: .875rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all .2s;
+  box-shadow: 0 4px 16px rgba(79,158,255,.2);
+}
+.btn-primary:hover { transform: translateY(-1px); box-shadow: 0 8px 24px rgba(79,158,255,.3); }
+.btn-secondary {
+  padding: 12px 28px;
+  border-radius: var(--r);
+  border: 1px solid var(--border2);
+  background: var(--surface);
+  color: var(--muted2);
+  font-family: 'Syne', sans-serif;
+  font-size: .875rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all .2s;
+}
+.btn-secondary:hover { border-color: var(--en); color: var(--en); }
+
+/* ===== FOOTER ===== */
+footer {
+  text-align: center;
+  padding: 32px 0 0;
+  color: var(--muted);
+  font-size: .75rem;
+  border-top: 1px solid var(--border);
+  margin-top: 48px;
+}
+.lang-dots {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  margin-bottom: 8px;
+}
+.ld {
+  width: 8px; height: 8px; border-radius: 50%;
+}
+.ld.en { background: var(--en); }
+.ld.ru { background: var(--ru); }
+.ld.kk { background: var(--kk); }
+
+@media (max-width: 550px) {
+  .options { grid-template-columns: 1fr; }
+  .dir-grid { grid-template-columns: 1fr; }
+  .tabs { width: 100%; }
+  .tab-btn { flex: 1; padding: 10px 16px; }
+}
+</style>
+</head>
+<body>
+
+<div class="wrap">
+  <header>
+    <div class="header-chip">
+      <span class="header-dot en"></span>
+      <span>EN</span>
+      <span class="header-dot ru"></span>
+      <span>RU</span>
+      <span class="header-dot kk"></span>
+      <span>QQ</span>
+    </div>
+    <h1>Til O'rganish<br><span class="grad">Lug'at & Test</span></h1>
+    <p>Ingliz, Rus va Qoraqalpoq tillarini birgalikda o'rganing</p>
+  </header>
+
+  <div class="tabs-wrap">
+    <div class="tabs">
+      <button class="tab-btn active" onclick="switchTab('dict')">📚 Yodlash (Lug'at)</button>
+      <button class="tab-btn" onclick="switchTab('quiz')">🎯 Testni Boshlash</button>
+    </div>
+  </div>
+
+  <!-- ===== DICTIONARY TAB ===== -->
+  <div class="tab-panel active" id="tab-dict">
+    <div class="mod-filter" id="modFilter"></div>
+    <div class="search-row">
+      <div class="search-box">
+        <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+        <input type="text" id="searchInput" placeholder="So'z qidiring..." oninput="filterDict(this.value)">
+      </div>
+      <div class="count-tag" id="dictCount">—</div>
+    </div>
+    <div class="dict-wrap">
+      <div class="dict-head">
+        <div class="dh en">Inglizcha</div>
+        <div class="dh ru">Ruscha</div>
+        <div class="dh kk">Qoraqalpoqcha</div>
+      </div>
+      <div class="dict-body" id="dictBody"></div>
+    </div>
+  </div>
+
+  <!-- ===== QUIZ TAB ===== -->
+  <div class="tab-panel" id="tab-quiz">
+    <div id="quizSetup" class="quiz-setup">
+      <div class="setup-section">
+        <span class="setup-label">Modul tanlang</span>
+        <div class="mod-filter" id="quizModFilter"></div>
+      </div>
+      <div class="setup-section">
+        <span class="setup-label">Savol yo'nalishi</span>
+        <div class="dir-grid">
+          <button class="dir-btn active" id="dir-en-kk" onclick="setDir('en','kk',this)">🇬🇧 Inglizcha → Qoraqalpoqcha</button>
+          <button class="dir-btn" id="dir-kk-en" onclick="setDir('kk','en',this)">🏴 Qoraqalpoqcha → Inglizcha</button>
+          <button class="dir-btn" id="dir-en-ru" onclick="setDir('en','ru',this)">🇬🇧 Inglizcha → Ruscha</button>
+          <button class="dir-btn" id="dir-ru-en" onclick="setDir('ru','en',this)">🇷🇺 Ruscha → Inglizcha</button>
+        </div>
+      </div>
+      <div class="setup-section">
+        <span class="setup-label">Savollar soni</span>
+        <div style="display:flex;gap:8px;flex-wrap:wrap;">
+          <button class="dir-btn active" id="qlen-10" onclick="setQLen(10,this)">10 ta</button>
+          <button class="dir-btn" id="qlen-20" onclick="setQLen(20,this)">20 ta</button>
+          <button class="dir-btn" id="qlen-30" onclick="setQLen(30,this)">30 ta</button>
+          <button class="dir-btn" id="qlen-50" onclick="setQLen(50,this)">50 ta</button>
+        </div>
+      </div>
+      <button class="start-btn" onclick="startQuiz()">▶ Testni Boshlash</button>
+    </div>
+
+    <div id="quizGame" style="display:none;">
+      <div class="quiz-card">
+        <div class="quiz-meta">
+          <span class="q-badge savol" id="qNum">Savol: 1</span>
+          <span class="q-badge score" id="qScore">Natija: 0</span>
+        </div>
+        <div class="progress-bar"><div class="progress-fill" id="qProg" style="width:0%"></div></div>
+        <div class="quiz-prompt" id="qPrompt">SHU SO'ZNING TARJIMASINI TOPING</div>
+        <div class="quiz-word" id="qWord">—</div>
+        <div class="options" id="qOptions"></div>
+      </div>
+    </div>
+
+    <div id="quizResult" style="display:none;">
+      <div class="result-wrap">
+        <div class="result-ring">
+          <div class="result-score-big" id="rScore">0</div>
+          <div class="result-total" id="rTotal">/ 20</div>
+        </div>
+        <div class="result-msg" id="rMsg">—</div>
+        <div class="result-sub" id="rSub">—</div>
+        <div class="result-btns">
+          <button class="btn-primary" onclick="restartQuiz()">🔄 Qaytadan</button>
+          <button class="btn-secondary" onclick="switchTab('dict')">📚 Lug'atga qaytish</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <footer>
+    <div class="lang-dots">
+      <span class="ld en"></span>
+      <span class="ld ru"></span>
+      <span class="ld kk"></span>
+    </div>
+    <p>EN · RU · QQ — Til O'rganish Platformasi</p>
+  </footer>
+</div>
+
+<script>
+const BOOKS = [
+  {id:'mod1',title:"Module 1 — Salomlashish",rows:[
+    {en:"Any question?",ru:"Есть вопросы?",kk:"sorawlarin'iz barma?"},
+    {en:"Be quite, please",ru:"Соблюдайте тишину",kk:"tinishliqti saqlan'"},
+    {en:"Can you repeat that?",ru:"Можете повторить это?",kk:"qaytalap jiberesizba?"},
+    {en:"Close your book",ru:"Закройте книгу",kk:"kitapti jabin'"},
+    {en:"I don't know",ru:"Я не знаю",kk:"bilmeymen"},
+    {en:"I don't understand",ru:"Я не понимаю",kk:"tu'sinbedim"},
+    {en:"Look at the board",ru:"Смотрите на доску",kk:"taxtag'a qarang"},
+    {en:"Open your book",ru:"Откройте книгу",kk:"kitabin'izdi ashin'"},
+    {en:"Read the text",ru:"Прочитайте текст",kk:"tekstti oqin'"},
+    {en:"Speak in English",ru:"Говорите на английском",kk:"ingliz tilinde so'ylen'"},
+    {en:"Hello",ru:"Привет",kk:"sa'lem"},
+    {en:"What's your name?",ru:"Как тебя зовут?",kk:"atin'iz kim?"},
+    {en:"Surname",ru:"Фамилия",kk:"familya"},
+    {en:"and you?",ru:"А тебя?",kk:"sen ne?"},
+    {en:"Bye",ru:"Пока",kk:"xosh"},
+    {en:"Good afternoon",ru:"Добрый день",kk:"qayirli ku'n"},
+    {en:"Good evening",ru:"Добрый вечер",kk:"qayirli kesh"},
+    {en:"Good morning",ru:"Доброе утро",kk:"qayirli tan'"},
+    {en:"Goodbye",ru:"До свидания",kk:"xosh"},
+    {en:"Have a nice day",ru:"Хорошего дня",kk:"waqtin'izdi jaqsi o'tkizin'"},
+    {en:"Hi",ru:"Привет",kk:"sa'lem"},
+    {en:"How are you?",ru:"Как ты?",kk:"qalay"},
+    {en:"I'm fine",ru:"Хорошо",kk:"jaqsi"},
+    {en:"I'm OK",ru:"Хорошо",kk:"men ju'da' jaqsiman"},
+    {en:"Nice to meet you",ru:"Приятно познакомиться",kk:"tanisqanimnan quwanishliman"},
+    {en:"Not bad",ru:"Неплохо",kk:"jaman emes"},
+    {en:"See you",ru:"До встречи",kk:"keyinrek ko'riskenshe"},
+    {en:"See you later",ru:"Увидимся позже",kk:"erten'ge shekem"},
+    {en:"Thank you",ru:"Спасибо",kk:"raxmet"},
+    {en:"What's new?",ru:"Какие новости?",kk:"ne jan'aliq"},
+    {en:"Miss",ru:"Мис",kk:"mirza"},
+    {en:"Mr",ru:"Мистер",kk:"xanim"},
+    {en:"Mrs",ru:"Миссис",kk:"xanim"},
+  ]},
+  {id:'mod1b',title:"Module 1 — Kasb & So'zlar",rows:[
+    {en:"Class",ru:"Класс",kk:"klaslas"},
+    {en:"College",ru:"Колледж",kk:"kolledj"},
+    {en:"Cool",ru:"Круто",kk:"a'jayip"},
+    {en:"Friend",ru:"Друг",kk:"dos'"},
+    {en:"Here",ru:"Здесь",kk:"bul jerde"},
+    {en:"Hospital",ru:"Больница",kk:"emlewxana"},
+    {en:"No",ru:"Нет",kk:"joq"},
+    {en:"Restaurant",ru:"Ресторан",kk:"restoran"},
+    {en:"School",ru:"Школа",kk:"mektep"},
+    {en:"Student",ru:"Студент",kk:"student"},
+    {en:"Yes",ru:"Да",kk:"awa"},
+    {en:"Actor / actress",ru:"Актёр/актриса",kk:"aktyor/aktrissa"},
+    {en:"Architect",ru:"Архитектор",kk:"arxitektor"},
+    {en:"Bus driver",ru:"Водитель автобуса",kk:"avtobus haydawshisi"},
+    {en:"Chef",ru:"Повар",kk:"bas aspaz"},
+    {en:"Dentist",ru:"Стоматолог",kk:"tis shipakeri"},
+    {en:"Doctor",ru:"Врач",kk:"shipaker"},
+    {en:"Electrician",ru:"Электрик",kk:"elektrik"},
+    {en:"Firefighter",ru:"Пожарный",kk:"o'rt o'shiriwshi"},
+    {en:"Nurse",ru:"Медсестра",kk:"miyirbike"},
+    {en:"Police officer",ru:"Полицейский",kk:"oficer"},
+    {en:"Secretary",ru:"Секретарь",kk:"xatker"},
+    {en:"Teacher",ru:"Учитель",kk:"mug'allim"},
+    {en:"Waiter / waitress",ru:"Официант/официантка",kk:"officiant"},
+    {en:"I'm sorry",ru:"Простите",kk:"keshiresiz"},
+    {en:"It's OK",ru:"Всё хорошо",kk:"ha'mmesi jaqsi"},
+    {en:"What do you do?",ru:"Чем ты занимаешься?",kk:"kim bolip isleysen?"},
+    {en:"age",ru:"Возраст",kk:"jas"},
+    {en:"beautiful",ru:"Красивый",kk:"shirayli, suliw"},
+    {en:"best friend",ru:"Лучший друг",kk:"jaqin dos"},
+    {en:"home",ru:"Дом",kk:"u'y"},
+    {en:"mobile phone",ru:"Сотовый телефон",kk:"telefon"},
+    {en:"nice",ru:"Хороший",kk:"jaqsi"},
+    {en:"old",ru:"Старый",kk:"eski"},
+    {en:"photo",ru:"Фото",kk:"foto"},
+    {en:"street",ru:"Улица",kk:"ko'she"},
+    {en:"today",ru:"Сегодня",kk:"bu'gin"},
+  ]},
+  {id:'mod1c',title:"Module 1 — Davlatlar & Millatlar",rows:[
+    {en:"Argentina – Argentinian",ru:"Аргентина / аргентинец",kk:"Argentina-Argentinaliq"},
+    {en:"Australia – Australian",ru:"Австралия / австралиец",kk:"Avstraliya-Avstraliyaliq"},
+    {en:"Brazil – Brazilian",ru:"Бразилия / бразилец",kk:"Braziliya-Braziliyaliq"},
+    {en:"Canada – Canadian",ru:"Канада / канадец",kk:"Kanada-Kanadaliq"},
+    {en:"China – Chinese",ru:"Китай / китаец",kk:"Qitay-Qitayliq"},
+    {en:"Egypt – Egyptian",ru:"Египет / египтянин",kk:"Misr-Misirliq"},
+    {en:"France – French",ru:"Франция / француз",kk:"Fransiya-Fransiyaliq"},
+    {en:"Hungary – Hungarian",ru:"Венгрия / венгер",kk:"Vengriya-Vengriyaliq"},
+    {en:"Ireland – Irish",ru:"Ирландия / ирландец",kk:"Irlandiya-Irlandiyaliq"},
+    {en:"Italy – Italian",ru:"Италия / итальянец",kk:"Italiya-Italiyaliq"},
+    {en:"Mexico – Mexican",ru:"Мексика / мексиканец",kk:"Meksika-Meksikaliq"},
+    {en:"Poland – Polish",ru:"Польша / поляк",kk:"Polsha-Polshaliq"},
+    {en:"Russia – Russian",ru:"Россия / русский",kk:"Rossiya-Rossiyaliq"},
+    {en:"Spain – Spanish",ru:"Испания / испанец",kk:"Ispaniya-Ispaniyaliq"},
+    {en:"The UK – British",ru:"Британия / британец",kk:"Britaniya-Britaniyaliq"},
+    {en:"The USA – American",ru:"Америка / американец",kk:"Amerika-Amerikaliq"},
+    {en:"Turkey – Turkish",ru:"Турция / турок",kk:"Turkiya-Turkiyaliq"},
+    {en:"I know",ru:"Я знаю",kk:"bilemen"},
+    {en:"Sure",ru:"Конечно",kk:"albette"},
+    {en:"What's your address?",ru:"Какой у вас адрес?",kk:"ma'nzilin'iz qanday?"},
+    {en:"Where are you from?",ru:"Откуда ты?",kk:"qayjerdensen'"},
+    {en:"I'm from…",ru:"Я из…",kk:"men….danman"},
+    {en:"I live in",ru:"Я живу",kk:"men..da jasayman"},
+  ]},
+  {id:'mod2',title:"Module 2 — Maktab & Oila",rows:[
+    {en:"Backpack",ru:"Рюкзак",kk:"ryukzak"},
+    {en:"notebook",ru:"Тетрадь",kk:"dapter"},
+    {en:"pen",ru:"Ручка",kk:"ruchka"},
+    {en:"pencil",ru:"Карандаш",kk:"qa'lem"},
+    {en:"Black",ru:"Чёрный",kk:"qara"},
+    {en:"Blue",ru:"Синий",kk:"kok"},
+    {en:"Brown",ru:"Коричневый",kk:"don'ir"},
+    {en:"Green",ru:"Зелёный",kk:"jasil"},
+    {en:"Orange",ru:"Оранжевый",kk:"tog sari"},
+    {en:"Pink",ru:"Розовый",kk:"rozoviy"},
+    {en:"Purple",ru:"Фиолетовый",kk:"fioletiy"},
+    {en:"Red",ru:"Красный",kk:"qizil"},
+    {en:"White",ru:"Белый",kk:"aq"},
+    {en:"Yellow",ru:"Жёлтый",kk:"sari"},
+    {en:"Big",ru:"Большой",kk:"u'lken"},
+    {en:"Boy",ru:"Мальчик",kk:"ul bala"},
+    {en:"Girl",ru:"Девочка",kk:"qiz"},
+    {en:"Man",ru:"Мужчина",kk:"kisi"},
+    {en:"Woman",ru:"Женщина",kk:"hayal"},
+    {en:"Married",ru:"Женатый/замужем",kk:"turmis qurgan"},
+    {en:"Single",ru:"Холост",kk:"boydaq"},
+    {en:"Small",ru:"Маленький",kk:"kishkene"},
+    {en:"Family",ru:"Семья",kk:"shan'araq"},
+    {en:"Baby",ru:"Ребёнок",kk:"bo'pe"},
+    {en:"Brother",ru:"Брат",kk:"ag'a-ini"},
+    {en:"Daughter",ru:"Дочь",kk:"qiz (perzent)"},
+    {en:"Father",ru:"Отец",kk:"a'ke"},
+    {en:"Grandfather",ru:"Дедушка",kk:"ata"},
+    {en:"Grandmother",ru:"Бабушка",kk:"kempir apa"},
+    {en:"Husband",ru:"Муж",kk:"ku'yew"},
+    {en:"Mother",ru:"Мать",kk:"ana"},
+    {en:"Parents",ru:"Родители",kk:"ata-ana"},
+    {en:"Sister",ru:"Сестра",kk:"sin'li"},
+    {en:"Son",ru:"Сын",kk:"ul perzent"},
+    {en:"Wife",ru:"Жена",kk:"hayal"},
+  ]},
+  {id:'mod2b',title:"Module 2 — Buyumlar & Texnologiya",rows:[
+    {en:"Angry",ru:"Сердитый",kk:"ashiwshaq"},
+    {en:"Bag",ru:"Сумка",kk:"sumka"},
+    {en:"Car",ru:"Автомобиль",kk:"mashina"},
+    {en:"Dictionary",ru:"Словарь",kk:"so'zlik"},
+    {en:"Key",ru:"Ключ",kk:"gilt"},
+    {en:"Magazine",ru:"Журнал",kk:"jurnal"},
+    {en:"Sunglasses",ru:"Солнечные очки",kk:"ko'z a'ynek"},
+    {en:"Ticket",ru:"Билет",kk:"bilet"},
+    {en:"Umbrella",ru:"Зонтик",kk:"zontik"},
+    {en:"Wallet",ru:"Бумажник",kk:"koshelyok"},
+    {en:"Watch",ru:"Наручные часы",kk:"kol sag'at"},
+    {en:"Camera",ru:"Камера",kk:"kamera"},
+    {en:"Headphones",ru:"Наушники",kk:"qulagshin"},
+    {en:"Internet",ru:"Интернет",kk:"internet"},
+    {en:"Keyboard",ru:"Клавиатура",kk:"klaviatura"},
+    {en:"Laptop",ru:"Ноутбук",kk:"noutbuk"},
+    {en:"PC",ru:"Компьютер",kk:"kompyuter"},
+    {en:"Screen",ru:"Экран",kk:"ekran"},
+    {en:"Smartphone",ru:"Смартфон",kk:"smartfon"},
+    {en:"Tablet",ru:"Планшет",kk:"planshet"},
+    {en:"Blond(e)",ru:"Блондин(ка)",kk:"aq/sari shashli"},
+    {en:"Dark",ru:"Тёмный",kk:"qara"},
+    {en:"Eyes",ru:"Глаза",kk:"ko'zler"},
+    {en:"Good looking",ru:"Красивый",kk:"suykimli"},
+    {en:"Hair",ru:"Волосы",kk:"shash"},
+    {en:"Long",ru:"Длинный",kk:"uzin"},
+    {en:"Short",ru:"Короткий",kk:"ariq"},
+    {en:"Slim",ru:"Худой",kk:"azg'in"},
+    {en:"Tall",ru:"Высокий",kk:"uzin"},
+    {en:"Young",ru:"Молодой",kk:"jas"},
+  ]},
+  {id:'mod3',title:"Module 3 — Vaqt & Hafta Kunlari",rows:[
+    {en:"Monday",ru:"Понедельник",kk:"du'shembi"},
+    {en:"Tuesday",ru:"Вторник",kk:"siyshembi"},
+    {en:"Wednesday",ru:"Среда",kk:"sa'rishembi"},
+    {en:"Thursday",ru:"Четверг",kk:"piyshembi"},
+    {en:"Friday",ru:"Пятница",kk:"juma"},
+    {en:"Saturday",ru:"Суббота",kk:"shembi"},
+    {en:"Sunday",ru:"Воскресенье",kk:"ekshembi"},
+    {en:"Weekday",ru:"Будние дни",kk:"jumis ku'nleri"},
+    {en:"Weekend",ru:"Выходные дни",kk:"ha'pte ku'nleri"},
+    {en:"coffee",ru:"Кофе",kk:"kofe"},
+    {en:"different",ru:"Разный",kk:"pariqli"},
+    {en:"early",ru:"Рано",kk:"erte"},
+    {en:"library",ru:"Библиотека",kk:"kitapxana"},
+    {en:"shop",ru:"Магазин",kk:"du'kan"},
+    {en:"start",ru:"Начинать",kk:"baslaw"},
+    {en:"every day",ru:"Каждый день",kk:"ha'r ku'ni"},
+    {en:"half",ru:"Половина",kk:"jarti"},
+    {en:"midnight",ru:"Полночь",kk:"yarim tu'n"},
+    {en:"noon",ru:"Полдень",kk:"pesin"},
+    {en:"o'clock",ru:"Часов",kk:"saat"},
+    {en:"Get home",ru:"Добраться домой",kk:"u'yge keliw"},
+    {en:"Get up",ru:"Просыпаться",kk:"uyqidan turiw"},
+    {en:"Go to bed",ru:"Идти спать",kk:"jatqua bariw"},
+    {en:"Go to work / school",ru:"Идти на работу",kk:"jumisqa bariw"},
+    {en:"Have a shower",ru:"Принять душ",kk:"shomiliw"},
+    {en:"Have breakfast",ru:"Завтракать",kk:"azang'uliq jewi"},
+    {en:"Study",ru:"Учиться",kk:"oqiw"},
+    {en:"Watch TV",ru:"Смотреть ТВ",kk:"televizor ko'riw"},
+    {en:"Work",ru:"Работать",kk:"jumis islaw"},
+  ]},
+  {id:'mod3b',title:"Module 3 — Sport & Bo'sh Vaqt",rows:[
+    {en:"Ball",ru:"Мяч",kk:"top"},
+    {en:"Boring",ru:"Скучный",kk:"zerikerli"},
+    {en:"Come",ru:"Приходить",kk:"keliw"},
+    {en:"Fun",ru:"Веселье",kk:"oyin ku'lki"},
+    {en:"Hate",ru:"Ненавидеть",kk:"jaman ko'riw"},
+    {en:"Need",ru:"Нуждаться",kk:"mu'ta'j boliw"},
+    {en:"Park",ru:"Парк",kk:"park"},
+    {en:"Together",ru:"Вместе",kk:"birge"},
+    {en:"Do athletics",ru:"Заниматься атлетикой",kk:"atletika menen shug'illaniw"},
+    {en:"Do gymnastics",ru:"Заниматься гимнастикой",kk:"gimnastika menen shug'illaniw"},
+    {en:"Go bowling",ru:"Пойти в боулинг",kk:"bowlinge bariw"},
+    {en:"Go cycling",ru:"Кататься на велосипеде",kk:"velosiped aydawg'a bariw"},
+    {en:"Go running",ru:"Бегать",kk:"ju'giriwge bariw"},
+    {en:"Go swimming",ru:"Заниматься плаванием",kk:"shomiliwg'a bariw"},
+    {en:"Play basketball",ru:"Играть в баскетбол",kk:"basketbol oynaw"},
+    {en:"Play football",ru:"Играть в футбол",kk:"futbol oynaw"},
+    {en:"Play tennis",ru:"Играть в теннис",kk:"tennis oynaw"},
+    {en:"Play volleyball",ru:"Играть в волейбол",kk:"voleybol oynaw"},
+    {en:"Go for coffee",ru:"Пойти попить кофе",kk:"kofe ishiwge bariw"},
+    {en:"Go shopping",ru:"Пойти за покупками",kk:"bazarlawg'a bariw"},
+    {en:"Go to the cinema",ru:"Пойти в кино",kk:"kinog'a bariw"},
+    {en:"Go to the gym",ru:"Пойти в спортзал",kk:"sportzalg'a bariw"},
+    {en:"Hang out with friends",ru:"Проводить время с друзьями",kk:"doslar menen waqit o'tkiziw"},
+    {en:"Listen to music",ru:"Послушать музыку",kk:"muzika tin'law"},
+    {en:"Play video games",ru:"Играть в видеоигры",kk:"video oyinlar oynaw"},
+    {en:"Chat show",ru:"Ток-шоу",kk:"sa'wbetlesiw ko'rsetiwi"},
+    {en:"Documentary",ru:"Документальный фильм",kk:"hu'jjetli film"},
+    {en:"Game show",ru:"Игровая программа",kk:"oyin ko'rsetiw"},
+    {en:"Sitcom",ru:"Комедийный сериал",kk:"serial"},
+    {en:"The news",ru:"Новости",kk:"xabar, jan'aliqlar"},
+  ]},
+  {id:'mod4',title:"Module 4 — Uy & Mebel",rows:[
+    {en:"Bathroom",ru:"Ванная",kk:"juwiniw xanasi"},
+    {en:"Bedroom",ru:"Спальня",kk:"jataqxana"},
+    {en:"Kitchen",ru:"Кухня",kk:"asxana"},
+    {en:"Living room",ru:"Гостиная",kk:"miymanxana"},
+    {en:"Air conditioner",ru:"Кондиционер",kk:"kondicioner"},
+    {en:"Chair",ru:"Кресло",kk:"orindiq"},
+    {en:"Lamp",ru:"Лампа",kk:"lampa"},
+    {en:"Mirror",ru:"Зеркало",kk:"ayna"},
+    {en:"Table",ru:"Стол",kk:"stol"},
+    {en:"Because",ru:"Потому что",kk:"sebebi"},
+    {en:"Buy",ru:"Покупать",kk:"satip aliw"},
+    {en:"Clean (adj)",ru:"Чистый",kk:"taza"},
+    {en:"Dirty",ru:"Грязный",kk:"kir"},
+    {en:"Floor",ru:"Пол",kk:"pol"},
+    {en:"Furniture",ru:"Мебель",kk:"mebel"},
+    {en:"Garden",ru:"Сад",kk:"bag'"},
+    {en:"Late",ru:"Поздно",kk:"kesh"},
+    {en:"Messy",ru:"Беспорядок",kk:"ta'rtipsiz"},
+    {en:"Clean (v)",ru:"Чистить",kk:"tazalaw"},
+    {en:"Cook",ru:"Готовить",kk:"pisiriw"},
+    {en:"Do the shopping",ru:"Делать покупки",kk:"bazarlaw"},
+    {en:"Do the washing",ru:"Стирать",kk:"juwiw"},
+    {en:"Mow the lawn",ru:"Косить газон",kk:"maysalardi qirqiw"},
+    {en:"Take out the rubbish",ru:"Выносить мусор",kk:"musordi taslaw"},
+    {en:"Wash the car",ru:"Мыть машину",kk:"mashina juwiw"},
+    {en:"Always",ru:"Всегда",kk:"ha'rdayim"},
+    {en:"Usually",ru:"Обычно",kk:"a'dette"},
+    {en:"Often",ru:"Часто",kk:"tez-tezden"},
+    {en:"Sometimes",ru:"Иногда",kk:"arasinda"},
+    {en:"Never",ru:"Никогда",kk:"heshqashan"},
+    {en:"Armchair",ru:"Кресло",kk:"kreslo"},
+    {en:"Bed",ru:"Кровать",kk:"krovat"},
+    {en:"Bookcase",ru:"Книжный шкаф",kk:"kitap shkaf"},
+    {en:"Desk",ru:"Рабочий стол",kk:"jumis stoli"},
+    {en:"Sofa",ru:"Диван",kk:"divan"},
+    {en:"Fridge",ru:"Холодильник",kk:"muzlatqish"},
+    {en:"Oven",ru:"Печка",kk:"pechka"},
+    {en:"Washing machine",ru:"Стиральная машина",kk:"kir juwiw mashinasi"},
+    {en:"Behind",ru:"Позади",kk:"arqasinda"},
+    {en:"In front of",ru:"Перед",kk:"aldinda"},
+    {en:"Next to",ru:"Рядом с",kk:"keyingi"},
+    {en:"Under",ru:"Под",kk:"artinda"},
+    {en:"Balcony",ru:"Балкон",kk:"balkon"},
+    {en:"Garage",ru:"Гараж",kk:"garaj"},
+    {en:"Stairs",ru:"Лестница",kk:"tekshe"},
+    {en:"Wardrobe",ru:"Гардероб",kk:"garderob"},
+    {en:"City",ru:"Город",kk:"qala"},
+    {en:"View",ru:"Вид",kk:"ko'rinis"},
+    {en:"First",ru:"Первый",kk:"birinshi"},
+    {en:"Second",ru:"Второй",kk:"ekinshi"},
+    {en:"Third",ru:"Третий",kk:"u'shinshi"},
+  ]},
+  {id:'mod5',title:"Module 5 — Transport & Shahar",rows:[
+    {en:"Bicycle lane",ru:"Велосипедная дорога",kk:"velosiped joli"},
+    {en:"City centre",ru:"Центр города",kk:"qala orayi"},
+    {en:"Far",ru:"Далеко",kk:"uzaq"},
+    {en:"Fast",ru:"Быстрый",kk:"tez"},
+    {en:"Money",ru:"Деньги",kk:"pul"},
+    {en:"Near",ru:"Близко",kk:"jaqin"},
+    {en:"People",ru:"Люди",kk:"adamlar"},
+    {en:"Public transport",ru:"Общественный транспорт",kk:"ja'miyetlik transport"},
+    {en:"Station",ru:"Остановка / вокзал",kk:"ba'ndirgi"},
+    {en:"Traffic",ru:"Дорожная пробка",kk:"jol tigizligi"},
+    {en:"Walk",ru:"Ходить",kk:"ju'riw"},
+    {en:"Drive a car",ru:"Водить машину",kk:"mashina aydaw"},
+    {en:"Ride a bike",ru:"Ездить на велосипеде",kk:"velosiped aydaw"},
+    {en:"Take a taxi",ru:"Взять такси",kk:"taksi uslaw"},
+    {en:"Take the bus",ru:"Сесть в автобус",kk:"avtobus toqtatiw"},
+    {en:"Take the underground",ru:"Сесть на метро",kk:"metroda bariw"},
+    {en:"Airport",ru:"Аэропорт",kk:"aeroport"},
+    {en:"Bank",ru:"Банк",kk:"bank"},
+    {en:"Café",ru:"Кафе",kk:"kafe"},
+    {en:"Cinema",ru:"Кинотеатр",kk:"kinoteatr"},
+    {en:"Hotel",ru:"Гостиница",kk:"miymanxana"},
+    {en:"Police station",ru:"Полицейский участок",kk:"militsiyaxana"},
+    {en:"Shopping centre",ru:"Торговый центр",kk:"sawda orayi"},
+    {en:"Supermarket",ru:"Супермаркет",kk:"supermarket"},
+    {en:"Map",ru:"Карта",kk:"xarita"},
+    {en:"Traffic lights",ru:"Светофор",kk:"svetofor"},
+    {en:"Between",ru:"Между",kk:"arasinda"},
+    {en:"Opposite",ru:"Противоположный",kk:"qarama qarsi"},
+    {en:"Go straight ahead",ru:"Идти прямо",kk:"tuwri ju'riw"},
+    {en:"Turn left / right",ru:"Поверните налево / направо",kk:"shepke/on'ga buril"},
+  ]},
+];
+
+const ALL_ROWS = [];
+BOOKS.forEach(b => b.rows.forEach(r => ALL_ROWS.push({...r, module: b.title, modId: b.id})));
+
+let activeDictMod = 'all';
+let activeQuizMod = 'all';
+let searchQ = '';
+let quizDir = {from:'en', to:'kk'};
+let quizLen = 10;
+let quizItems = [];
+let qIdx = 0, qScore = 0;
+
+function buildModFilter(elId, clickFn) {
+  const el = document.getElementById(elId);
+  el.innerHTML = '';
+  const allBtn = document.createElement('button');
+  allBtn.className = 'mod-btn active';
+  allBtn.textContent = 'Barchasi';
+  allBtn.onclick = () => clickFn('all', allBtn, el);
+  el.appendChild(allBtn);
+  BOOKS.forEach(b => {
+    const btn = document.createElement('button');
+    btn.className = 'mod-btn';
+    btn.textContent = b.title.split(' — ')[0];
+    btn.title = b.title;
+    btn.onclick = () => clickFn(b.id, btn, el);
+    el.appendChild(btn);
+  });
+}
+
+buildModFilter('modFilter', (id, btn, el) => {
+  el.querySelectorAll('.mod-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  activeDictMod = id;
+  renderDict();
+});
+buildModFilter('quizModFilter', (id, btn, el) => {
+  el.querySelectorAll('.mod-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  activeQuizMod = id;
+});
+
+function getRows(modId) {
+  return ALL_ROWS.filter(r => modId === 'all' || r.modId === modId);
+}
+function getFilteredRows() {
+  return ALL_ROWS.filter(r => {
+    if (activeDictMod !== 'all' && r.modId !== activeDictMod) return false;
+    if (searchQ) {
+      const q = searchQ.toLowerCase();
+      return r.en.toLowerCase().includes(q) || r.ru.toLowerCase().includes(q) || r.kk.toLowerCase().includes(q);
+    }
+    return true;
+  });
+}
+function filterDict(v) { searchQ = v; renderDict(); }
+
+function renderDict() {
+  const rows = getFilteredRows();
+  document.getElementById('dictCount').textContent = rows.length + " ta so'z";
+  const body = document.getElementById('dictBody');
+  if (!rows.length) {
+    body.innerHTML = '<div class="empty-state"><span class="big">🔍</span><p>Hech narsa topilmadi</p></div>';
+    return;
+  }
+  let html = '';
+  let lastMod = '';
+  rows.forEach(r => {
+    if (!searchQ && r.module !== lastMod) {
+      html += `<div class="dict-row"><div class="sec-label">${r.module}</div></div>`;
+      lastMod = r.module;
+    }
+    html += `<div class="dict-row"><div class="dc en">${r.en}</div><div class="dc ru">${r.ru}</div><div class="dc kk">${r.kk}</div></div>`;
+  });
+  body.innerHTML = html;
+}
+
+function setDir(f, t, btn) {
+  quizDir = {from:f, to:t};
+  document.querySelectorAll('.dir-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+}
+function setQLen(n, btn) {
+  quizLen = n;
+  document.querySelectorAll('[id^="qlen-"]').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+}
+
+function shuffle(arr) { return [...arr].sort(() => Math.random() - .5); }
+
+function startQuiz() {
+  const pool = getRows(activeQuizMod).filter(r => r[quizDir.from] && r[quizDir.to] && r[quizDir.from] !== '—' && r[quizDir.to] !== '—');
+  if (pool.length < 4) { alert("Kamida 4 ta so'z kerak! Boshqa modul tanlang."); return; }
+  quizItems = shuffle(pool).slice(0, Math.min(quizLen, pool.length));
+  qIdx = 0; qScore = 0;
+  document.getElementById('quizSetup').style.display = 'none';
+  document.getElementById('quizGame').style.display = 'block';
+  document.getElementById('quizResult').style.display = 'none';
+  renderQuestion();
+}
+
+function renderQuestion() {
+  if (qIdx >= quizItems.length) { showResult(); return; }
+  const cur = quizItems[qIdx];
+  const total = quizItems.length;
+  document.getElementById('qNum').textContent = `Savol: ${qIdx+1} / ${total}`;
+  document.getElementById('qScore').textContent = `Natija: ${qScore}`;
+  document.getElementById('qProg').style.width = Math.round((qIdx / total) * 100) + '%';
+  const labels = {en:'INGLIZCHA', ru:'RUSCHA', kk:'QORAQALPOQCHA'};
+  document.getElementById('qPrompt').textContent = `SHU ${labels[quizDir.from]} SO'ZNING ${labels[quizDir.to]} TARJIMASINI TOPING:`;
+  const wordEl = document.getElementById('qWord');
+  wordEl.textContent = cur[quizDir.from];
+  wordEl.style.animation = 'none';
+  void wordEl.offsetWidth;
+  wordEl.style.animation = '';
+  const correct = cur[quizDir.to];
+  const allPool = getRows(activeQuizMod).filter(r => r[quizDir.to] && r[quizDir.to] !== correct && r[quizDir.to] !== '—');
+  const wrongs = shuffle(allPool).slice(0, 3).map(r => r[quizDir.to]);
+  const opts = shuffle([correct, ...wrongs]);
+  const optsEl = document.getElementById('qOptions');
+  optsEl.innerHTML = '';
+  opts.forEach(opt => {
+    const btn = document.createElement('button');
+    btn.className = 'opt-btn';
+    btn.textContent = opt;
+    btn.onclick = () => checkAnswer(opt, correct);
+    optsEl.appendChild(btn);
+  });
+}
+
+function checkAnswer(chosen, correct) {
+  document.querySelectorAll('.opt-btn').forEach(b => {
+    b.disabled = true;
+    if (b.textContent === correct) b.classList.add('correct');
+    else if (b.textContent === chosen && chosen !== correct) b.classList.add('wrong');
+  });
+  if (chosen === correct) qScore++;
+  setTimeout(() => { qIdx++; renderQuestion(); }, 950);
+}
+
+function showResult() {
+  document.getElementById('quizGame').style.display = 'none';
+  document.getElementById('quizResult').style.display = 'block';
+  const total = quizItems.length;
+  const pct = Math.round((qScore / total) * 100);
+  document.getElementById('rScore').textContent = qScore;
+  document.getElementById('rTotal').textContent = '/ ' + total;
+  const msgs = [
+    [90, "Ajoyib natija!", "Siz zo'rsiz! Deyarli hammasi to'g'ri!"],
+    [70, "Yaxshi!", "Yana biroz mashq qiling, yaxshi ketmoqda!"],
+    [50, "Yomon emas!", "Davom eting, ko'proq yodlash kerak."],
+    [0, "Ko'proq yodlang!", "Tushkunlikka tushmang, mashq qiling!"],
+  ];
+  const [,msg,sub] = msgs.find(([t]) => pct >= t);
+  document.getElementById('rMsg').textContent = msg + ` (${pct}%)`;
+  document.getElementById('rSub').textContent = sub;
+}
+
+function restartQuiz() {
+  document.getElementById('quizSetup').style.display = 'block';
+  document.getElementById('quizGame').style.display = 'none';
+  document.getElementById('quizResult').style.display = 'none';
+}
+
+function switchTab(t) {
+  document.querySelectorAll('.tab-btn').forEach((b,i) => b.classList.toggle('active', (t==='dict'&&i===0)||(t==='quiz'&&i===1)));
+  document.querySelectorAll('.tab-panel').forEach((p,i) => p.classList.toggle('active', (t==='dict'&&i===0)||(t==='quiz'&&i===1)));
+}
+
+renderDict();
+</script>
+</body>
+</html>
